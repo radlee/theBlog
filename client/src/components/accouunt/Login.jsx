@@ -57,7 +57,7 @@ function Login() {
   return (
     <Component>
         <Box>
-            <img src={ imageURL } height="250px" alt="" />
+            <img src={ imageURL } height="250px" alt="" style={{ display: 'block', margin: '0 auto' }}/>
             {
             account === 'login' ? 
                 <Wrapper>
