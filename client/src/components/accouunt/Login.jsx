@@ -44,18 +44,26 @@ const Text = styled(Typography)`
     color: #878787;
     font-sie: 16px;
 `;
+
+const signupInitialValues = {
+    name: '',
+    username: '',
+    password: ''
+}
+
 function Login() {
 
     const imageURL = 'https://mir-s3-cdn-cf.behance.net/project_modules/max_632/61ac58164464737.63f72d649fbb1.png';
 
     const [account, toggleAccount] = useState('login');
+    const [signup, setSignup] = useState(signupInitialValues)
 
     const toggleSignup = () => {
         account ===  'signup' ? toggleAccount('login') : toggleAccount('signup');
     }
 
     const onInputChange = (e) => {
-        console.log(e.target.name, e.target.value)
+        setSignup({ ...signup, [e.target.name] : e.target.value })
     }
 
   return (
