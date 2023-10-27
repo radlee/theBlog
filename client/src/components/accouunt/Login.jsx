@@ -54,6 +54,10 @@ function Login() {
         account ===  'signup' ? toggleAccount('login') : toggleAccount('signup');
     }
 
+    const onInputChange = (e) => {
+        console.log(e.target.name, e.target.value)
+    }
+
   return (
     <Component>
         <Box>
@@ -69,9 +73,9 @@ function Login() {
                 </Wrapper> 
             :
                 <Wrapper>
-                    <TextField variant='standard' label='Enter Name'/>
-                    <TextField variant='standard' label='Enter Username'/>
-                    <TextField variant='standard' label='Enter Password'/>
+                    <TextField variant='standard' name='name' onChange={(e) => onInputChange(e)} label='Enter Name'/>
+                    <TextField variant='standard' name='username' onChange={(e) => onInputChange(e)} label='Enter Username'/>
+                    <TextField variant='standard' name='password' onChange={(e) => onInputChange(e)} label='Enter Password'/>
                     <SignUpButton>Signup</SignUpButton>
                     <Text style={{ textAlign: 'center' }}>OR</Text>
                     <LoginButton variant='contained' onClick={() => toggleSignup()}>Already have an account</LoginButton>
