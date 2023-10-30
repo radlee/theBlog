@@ -2,6 +2,7 @@ import { useState, useContext } from 'react';
 import { Box, TextField, Button, styled, Typography } from '@mui/material';
 import { API } from '../../service/api';
 import { DataContext } from '../../context/DataProvider';
+import { useNavigate } from 'react-router-dom';
 
 const Component = styled(Box)`
 width: 400px;
@@ -66,7 +67,7 @@ const signupInitialValues = {
     password: ''
 }
 
-function Login() {
+function Login({ isUserAuthenticated }) {
 
     const imageURL = 'https://mir-s3-cdn-cf.behance.net/project_modules/max_632/61ac58164464737.63f72d649fbb1.png';
 
@@ -76,6 +77,7 @@ function Login() {
     const [error, setError] = useState('');
 
     const { setAccount } = useContext(DataContext);
+    const navigate = useNavigate();
 
     const toggleSignup = () => {
         account ===  'signup' ? toggleAccount('login') : toggleAccount('signup');
@@ -109,6 +111,10 @@ function Login() {
             sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken }`);
 
             setAccount({ username: response.data.username, name: response.data.name });
+
+            isUserAuthenticated(true);
+
+            navigate('/');
 
         } else {
             setError('Something went wrong! Please try again later');
