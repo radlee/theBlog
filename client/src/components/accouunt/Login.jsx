@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Box, TextField, Button, styled, Typography } from '@mui/material';
 import { API } from '../../service/api';
+import { DataContext } from '../../context/DataProvider';
 
 const Component = styled(Box)`
 width: 400px;
@@ -74,6 +75,8 @@ function Login() {
     const [login, setLogin] = useState(loginInitialValues);
     const [error, setError] = useState('');
 
+    const { setAccount } = useContext(DataContext);
+
     const toggleSignup = () => {
         account ===  'signup' ? toggleAccount('login') : toggleAccount('signup');
     }
@@ -101,6 +104,12 @@ function Login() {
         let response = await API.userLogin(login);
         if(response.isSuccess) {
             setError('');
+
+            sessionStorage.setItem('accessToken', `Bearer ${response.data.accessToken }`);
+            sessionStorage.setItem('refreshToken', `Bearer ${response.data.refreshToken }`);
+
+            setAccount({ username: response.data.username, name: response.data.name });
+
         } else {
             setError('Something went wrong! Please try again later');
         }
