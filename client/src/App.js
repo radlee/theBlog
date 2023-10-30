@@ -1,12 +1,38 @@
-
-import './App.css';
+import { useState } from 'react';
+import DataProvider from './context/DataProvider';
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Login from './components/accouunt/Login';
+import Home from './components/home/Home'
+import Header from './components/header/Header';
+
+const PrivateRoute = ({ isAuthenticated, ...props }) => {
+
+  return isAuthenticated ?
+  <>
+    <Header />
+    <Outlet />
+  </>
+  : <Navigate replace to='/login'/>
+}
 
 function App() {
+
+  const [isAuthenticated, isUserAuthenticated] = useState(false);
+
+
   return (
-    <div style={{ marginTop: 60 }}>
-    <Login />
-    </div>
+    <DataProvider>
+      <BrowserRouter>
+        <div style={{ marginTop: 60 }}>
+          <Routes>
+            <Route path='/login' element={<Login isUserAuthenticated={isUserAuthenticated}/>} />
+            <Route path='/' element={<PrivateRoute isAuthenticated={isAuthenticated} />} >
+            <Route path='/' element={<Home />} />
+            </Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </DataProvider>
   );
 }
 
