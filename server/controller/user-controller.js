@@ -36,7 +36,7 @@ export const loginUser = async (request, response) => {
     try {
         let match = await bcrypt.compare(request.body.password, user.password);
         if(match) {
-            const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, { expires: '15min' });
+            const accessToken = jwt.sign(user.toJSON(), process.env.ACCESS_SECRET_KEY, { expiresIn: '15min' });
             const refreshToken = jwt.sign(user.toJSON(), process.env.REFRESH_SECRET_KEY);
 
             const newToken = new Token({ token: refreshToken });
