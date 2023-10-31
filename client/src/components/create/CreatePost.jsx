@@ -70,7 +70,7 @@ const CreatePost = () => {
             }
         }
         getImage();
-        post.categories = location.search?.split?.('=')[1] || 'All';
+        post.categories = location.search?.split('=')[1] || 'All';
         post.username = account.username;
     },[file]);
 
@@ -84,7 +84,12 @@ const CreatePost = () => {
                 <label htmlFor='fileInput'>
                     <FileUploadIcon fontSize='large' color='action'/>
                 </label>
-                <input type='file' id='fileInput' style={{ display: 'none' }} onChange={(e) => setFile(e.target.files[0])} />
+                <input 
+                    type='file' 
+                    id='fileInput' 
+                    style={{ display: 'none' }} 
+                    onChange={(e) => setFile(e.target.files[0])} 
+                />
                 <InputTextField placeholder='Title' onChange={(e) => handleChange(e)} name='title' />
                 <Button variant='contained'>Publish</Button>
             </StyledFormControl>
