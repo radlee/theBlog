@@ -58,13 +58,12 @@ const CreatePost = () => {
     const url = post.picture ? post.picture : 'https://images.pexels.com/photos/459654/pexels-photo-459654.jpeg?auto=compress&cs=tinysrgb&w=400';
 
     useEffect(() => {
-        const getImage = async () => {
+        const getImage = async () => { 
             if(file) {
                 const data = new FormData();
-                data.append('name', file.name);
-                data.append('file', file);
-
-                //API Call
+                data.append("name", file.name);
+                data.append("file", file);
+                
                 const response = await API.uploadFile(data);
                 post.picture = response.data;
             }
@@ -72,7 +71,7 @@ const CreatePost = () => {
         getImage();
         post.categories = location.search?.split('=')[1] || 'All';
         post.username = account.username;
-    },[file]);
+    }, [file])
 
     const handleChange = (e) => {
         setPost({ ...post, [e.target.name]: e.target.value })

@@ -8,3 +8,7 @@ export const uploadImage = (request, response) => {
     
     return response.status(200).json(imageUrl);
 }
+
+export const getImage = (request, response) => {
+    // Your code for handling image retrieval here
+};

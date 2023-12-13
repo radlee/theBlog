@@ -28,7 +28,7 @@ axiosInstance.interceptors.response.use(
     },
     function(error) {
         //Stop Global Loader Here
-        return Promise.reject(processError(error))
+        return Promise.reject(ProcessError(error))
     }
 )
 
@@ -51,7 +51,7 @@ const processResponse = (response) => {
 //////////////////////////////////////////
 // If success -> return { isSuccess: true, data: Object }
 // If fail -> return { isFailure: true, status: String, msg: String, code: int }
-const processError = (error) => {
+const ProcessError = (error) => {
     if (error.response) {
         //Request made and server responded with a status other
         //that fails out of range 2.x.x
